@@ -8,8 +8,8 @@ console.log(fileName)
 // GET ALL RECIPES
 export async function getRecipes() {
 try {
-    const data = await fs.readfile(fileName, 'utf8')
-    const converted = JSON.parse(data)
+    const data = await fs.readFile(fileName, 'utf8');
+    const converted = JSON.parse(data);
     console.log(converted)
     return converted
     }
@@ -18,14 +18,17 @@ try {
     }
 }
 
+getRecipes();
+
 // GET A RECIPE BY ID
 export async function getRecipeByID(id) {
     try {
-       const recipes = await getRecipes();
+       const data = await fs.readFile(fileName, 'utf8')
+       const recipes = JSON.parse(data);
        if (!Array.isArray(recipes)) throw new Error('Unexpected data format');
        const recipe = recipes.find(r => r.id === id);
        if (!recipe) throw new Error('Recipe not found');
-       console.log(recipe);
+    //    console.log(recipe);
        return recipe;
     } catch (error) {
        console.error('Unable to retrieve');
@@ -35,12 +38,16 @@ export async function getRecipeByID(id) {
 
 getRecipeByID("4c848d48-b81e-4d6f-b45d-7b3090f4f8ef").then(recipe => {
     console.log(recipe);
-}).catch(error => {
-    console.error(error);
 });
 
 // CREATE A RECIPE
-export async function createRecipe(newRecipe) {}
+//
+export async function createRecipe(newRecipe) {
+    const data = await fs.readFile(fileName, 'utf8')
+    const one = data.push;
+    const recipes = JSON.parse(data);
+}
+createRecipe(bananaBread)
 
 // UPDATE A RECIPE BY ID
 export async function updateRecipeByID(id, updatedRecipe) {}
